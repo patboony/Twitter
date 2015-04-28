@@ -15,6 +15,12 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var screennameLabel: UILabel!
     @IBOutlet weak var timeStampLabel: UILabel!
     @IBOutlet weak var tweetTextLabel: UILabel!
+    @IBOutlet weak var favoriteButton: UIButton!
+    
+    var tweetID: String?
+    
+   
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,6 +31,29 @@ class TweetCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    @IBAction func retweetAction(sender: AnyObject) {
+    }
+    
+    
+    @IBAction func replyAction(sender: AnyObject) {
+    }
+    
+    
+    @IBAction func favoriteAction(sender: AnyObject) {
+    
+        
+        TwitterClient.sharedInstance.favoriteStatusWithParams(["id":tweetID!] as NSDictionary) {
+            (error: NSError?) in
+            if error == nil {
+                // change text color
+                self.favoriteButton.titleLabel!.textColor = UIColor(white: 0.4, alpha: 1.0)
+            } else {
+                // alert error
+            }
+        }
+
     }
     
     override func layoutSubviews() {

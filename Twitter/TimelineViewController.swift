@@ -93,6 +93,8 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         if let profileImageURL = tweets?[indexPath.row].user!.profileImageUrl {
             cell.profileImageView.setImageWithURL(NSURL(string: profileImageURL))
         }
+        cell.tweetID = tweets?[indexPath.row].tweetID!
+        
         return cell
     }
     

@@ -17,8 +17,8 @@ class ComposeViewController: UIViewController {
     @IBOutlet weak var tweetTextField: UITextField!
     @IBOutlet weak var charRemaining: UILabel!
     
-    var in_reply_to_status_id: String?
-    
+    var replyToStatusID: String?
+    var initialText: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()

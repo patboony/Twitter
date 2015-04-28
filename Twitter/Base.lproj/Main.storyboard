@@ -132,6 +132,9 @@
                                                     <state key="normal" title="Reply">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="replyAction:" destination="nn7-5K-IRK" eventType="touchUpInside" id="vdZ-3n-dRc"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jG2-8K-RfD">
                                                     <rect key="frame" x="102" y="67" width="39" height="17"/>
@@ -139,6 +142,9 @@
                                                     <state key="normal" title="Retweet">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="retweetAction:" destination="nn7-5K-IRK" eventType="touchUpInside" id="H9d-zR-yyL"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UqE-Df-Pdt">
                                                     <rect key="frame" x="149" y="67" width="38" height="17"/>
@@ -146,6 +152,9 @@
                                                     <state key="normal" title="Favorite">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="favoriteAction:" destination="nn7-5K-IRK" eventType="touchUpInside" id="thU-pf-9G6"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -173,6 +182,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="favoriteButton" destination="UqE-Df-Pdt" id="pkn-5s-Boz"/>
                                             <outlet property="nameLabel" destination="feo-s6-KnM" id="ISs-a5-efa"/>
                                             <outlet property="profileImageView" destination="tFX-bU-c4x" id="8iz-xS-xG7"/>
                                             <outlet property="screennameLabel" destination="N7f-fA-UpF" id="HY7-zt-jWN"/>
