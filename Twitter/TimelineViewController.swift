@@ -90,6 +90,12 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         cell.nameLabel.text = tweets?[indexPath.row].user!.name!
         cell.timeStampLabel.text = calculateTimePassedSinceTimestamp(tweets?[indexPath.row].createdAt)
         cell.screennameLabel.text = "@" + (tweets?[indexPath.row].user!.screenname)!
+        cell.favoriteCount = (tweets?[indexPath.row].favorited)!
+        cell.retweetCount = (tweets?[indexPath.row].retweeted)!
+        
+        cell.retweetCountLabel.text = String(format: "%d", cell.retweetCount!)
+        cell.favoriteCountLabel.text = String(format: "%d", cell.favoriteCount!)
+        
         if let profileImageURL = tweets?[indexPath.row].user!.profileImageUrl {
             cell.profileImageView.setImageWithURL(NSURL(string: profileImageURL))
         }

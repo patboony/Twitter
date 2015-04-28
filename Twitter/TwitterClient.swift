@@ -23,6 +23,36 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
         
         return Static.instance
     }
+
+    
+    func retweetStatusWithID(tweetID: String, completion: (error: NSError?) -> ()){
+        
+        let postURL: String = "1.1/statuses/retweet/" + tweetID + ".json"
+        
+        POST(postURL, parameters: nil, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+            
+            println("Status retweeted!")
+            completion(error: nil)
+            
+            }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+                println("error retweeting status \(error.description)")
+                completion(error: error)
+        }
+    }
+
+    
+    func unfavoriteStatusWithParams(params: NSDictionary?, completion: (error: NSError?) -> ()){
+        
+        POST("1.1/favorites/destroy.json", parameters: params, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+            
+            println("Status unfavorited!")
+            completion(error: nil)
+            
+            }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+                println("error unfavoriting status \(error.description)")
+                completion(error: error)
+        }
+    }
     
     func favoriteStatusWithParams(params: NSDictionary?, completion: (error: NSError?) -> ()){
         

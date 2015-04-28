@@ -16,9 +16,71 @@ class TweetDetailViewController: UIViewController {
     @IBOutlet weak var screennameLabel: UILabel!
     @IBOutlet weak var tweetTextLabel: UILabel!
     @IBOutlet weak var timeStampLabel: UILabel!
+    @IBOutlet weak var retweetCountLabel: UILabel!
+    @IBOutlet weak var favoriteCountLabel: UILabel!
+    @IBOutlet weak var retweetButton: UIButton!
+    @IBOutlet weak var favoriteButton: UIButton!
     
     var currentTweet: Tweet?
+    var tweetID: String?
+    var favoriteCount: Int?
+    var retweetCount: Int?
+    var isFavorited: Bool = false
+    var isRetweeted: Bool = false
 
+    @IBAction func retweetAction(sender: AnyObject) {
+        TwitterClient.sharedInstance.retweetStatusWithID(tweetID!) {
+            (error: NSError?) in
+            if error == nil {
+                // change text
+                self.retweetButton.titleLabel!.text = "Undo"
+                self.retweetButton.sizeToFit()
+                self.retweetCount! += 1
+                self.retweetCountLabel.text = String(format: "%d", self.retweetCount!)
+                self.isRetweeted = true
+            } else {
+                // alert error
+            }
+        }
+
+    }
+    
+    @IBAction func favoriteAction(sender: AnyObject) {
+        
+        if !isFavorited {
+            TwitterClient.sharedInstance.favoriteStatusWithParams(["id":tweetID!] as NSDictionary) {
+                (error: NSError?) in
+                if error == nil {
+                    // change text
+                    self.favoriteButton.titleLabel!.text = "Unfav"
+                    self.favoriteButton.sizeToFit()
+                    self.favoriteCount! += 1
+                    self.favoriteCountLabel.text = String(format: "%d", self.favoriteCount!)
+                    self.isFavorited = true
+                } else {
+                    // alert error
+                }
+            }
+        } else {
+            
+            TwitterClient.sharedInstance.unfavoriteStatusWithParams(["id":tweetID!] as NSDictionary) {
+                (error: NSError?) in
+                if error == nil {
+                    // change text color
+                    self.favoriteButton.titleLabel!.text = "Favorite"
+                    self.favoriteButton.sizeToFit()
+                    self.favoriteCount! -= 1
+                    self.favoriteCountLabel.text = String(format: "%d", self.favoriteCount!)
+                    self.isFavorited = false
+                } else {
+                    // alert error
+                }
+            }
+            
+        }
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,6 +89,12 @@ class TweetDetailViewController: UIViewController {
             nameLabel.text = cTweet.user!.name!
             screennameLabel.text = "@" + cTweet.user!.screenname!
             timeStampLabel.text = calculateTimePassedSinceTimestamp(cTweet.createdAt)
+            favoriteCount = cTweet.favorited!
+            retweetCount = cTweet.retweeted
+            retweetCountLabel.text = String(format: "%d",retweetCount!)
+            favoriteCountLabel.text = String(format: "%d", favoriteCount!)
+            tweetID = cTweet.tweetID!
+            
             if let profileImageURL = cTweet.user!.profileImageUrl {
                 profileImageView.setImageWithURL(NSURL(string: profileImageURL))
             }

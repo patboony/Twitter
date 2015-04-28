@@ -16,13 +16,18 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var timeStampLabel: UILabel!
     @IBOutlet weak var tweetTextLabel: UILabel!
     @IBOutlet weak var favoriteButton: UIButton!
+    @IBOutlet weak var retweetButton: UIButton!
+    @IBOutlet weak var retweetCountLabel: UILabel!
+    @IBOutlet weak var favoriteCountLabel: UILabel!
     
     var tweetID: String?
-    
-   
-    
+    var favoriteCount: Int?
+    var retweetCount: Int?
+    var isFavorited: Bool = false
+    var isRetweeted: Bool = false
     
     override func awakeFromNib() {
+        
         super.awakeFromNib()
         // Initialization code
     }
@@ -34,6 +39,21 @@ class TweetCell: UITableViewCell {
     }
     
     @IBAction func retweetAction(sender: AnyObject) {
+        
+        TwitterClient.sharedInstance.retweetStatusWithID(tweetID!) {
+            (error: NSError?) in
+            if error == nil {
+                // change text
+                self.retweetButton.titleLabel!.text = "Undo"
+                self.retweetButton.sizeToFit()
+                self.retweetCount! += 1
+                self.retweetCountLabel.text = String(format: "%d", self.retweetCount!)
+                self.isRetweeted = true
+            } else {
+                // alert error
+            }
+        }
+        
     }
     
     
@@ -42,17 +62,38 @@ class TweetCell: UITableViewCell {
     
     
     @IBAction func favoriteAction(sender: AnyObject) {
-    
-        
-        TwitterClient.sharedInstance.favoriteStatusWithParams(["id":tweetID!] as NSDictionary) {
-            (error: NSError?) in
-            if error == nil {
-                // change text color
-                self.favoriteButton.titleLabel!.textColor = UIColor(white: 0.4, alpha: 1.0)
-            } else {
-                // alert error
+        if !isFavorited {
+            TwitterClient.sharedInstance.favoriteStatusWithParams(["id":tweetID!] as NSDictionary) {
+                (error: NSError?) in
+                if error == nil {
+                    // change text
+                    self.favoriteButton.titleLabel!.text = "Unfav"
+                    self.favoriteButton.sizeToFit()
+                    self.favoriteCount! += 1
+                    self.favoriteCountLabel.text = String(format: "%d", self.favoriteCount!)
+                    self.isFavorited = true
+                } else {
+                    // alert error
+                }
             }
+        } else {
+            
+            TwitterClient.sharedInstance.unfavoriteStatusWithParams(["id":tweetID!] as NSDictionary) {
+                (error: NSError?) in
+                if error == nil {
+                    // change text color
+                    self.favoriteButton.titleLabel!.text = "Favorite"
+                    self.favoriteButton.sizeToFit()
+                    self.favoriteCount! -= 1
+                    self.favoriteCountLabel.text = String(format: "%d", self.favoriteCount!)
+                    self.isFavorited = false
+                } else {
+                    // alert error
+                }
+            }
+            
         }
+        
 
     }
     
