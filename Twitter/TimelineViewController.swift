@@ -124,9 +124,18 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        var tweetDetailVC = segue.destinationViewController as! TweetDetailViewController
-        var indexPath = tableView.indexPathForCell(sender as! UITableViewCell) as NSIndexPath!
-        tweetDetailVC.currentTweet = tweets?[indexPath.row]
+        if segue.identifier == "tweetDetailPush" {
+            var tweetDetailVC = segue.destinationViewController as! TweetDetailViewController
+            var indexPath = tableView.indexPathForCell(sender as! UITableViewCell) as NSIndexPath!
+            tweetDetailVC.currentTweet = tweets?[indexPath.row]
+        }
+        
+        if segue.identifier == "composeModal" {
+            
+            let composeNC = segue.destinationViewController as! UINavigationController
+            let composeVC = composeNC.visibleViewController as! ComposeViewController
+        }
+        
     }
     
 

@@ -24,6 +24,19 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
         return Static.instance
     }
     
+    func updateStatusWithParams(params: NSDictionary?, completion: (error: NSError?) -> ()){
+        
+        POST("1.1/statuses/update.json", parameters: params, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+            
+            println("Status posted")
+            completion(error: nil)
+            
+            }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+            println("error posting status update \(error.description)")
+            completion(error: error)
+        }
+    }
+    
     // params - in case we want to do pagination
     func homeTimelineWithParams(params: NSDictionary?, completion: (tweets: [Tweet]?, error: NSError?) -> ()) {
         
