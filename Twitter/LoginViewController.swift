@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+
 class LoginViewController: UIViewController {
 
     @IBOutlet weak var usernameTextField: UITextField!
@@ -15,7 +17,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
 
@@ -24,8 +26,31 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func loginAction(sender: AnyObject) {
+    func showAlertWithTitle(title: String?, body: String){
+        let alert = UIAlertController(title: title!, message: body, preferredStyle: UIAlertControllerStyle.Alert)
+        let alertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+        alert.addAction(alertAction)
+        self.presentViewController(alert, animated: true, completion: nil)
     }
+    
+    @IBAction func loginAction(sender: AnyObject) {
+        
+        TwitterClient.sharedInstance.loginWithCompletion(){
+            (user: User?, error: NSError?) in
+            
+            // Can we put this in the User class? Why would we want to hide this from the View Controller level?
+            if user != nil {
+                // perform segue
+                self.performSegueWithIdentifier("loginSegue", sender: self)
+            } else {
+                // handle login error
+                self.showAlertWithTitle("Unable to Login", body: "Authorization failed. Please try again.")
+                
+            }
+        }
+
+    }
+    
 
     /*
     // MARK: - Navigation
