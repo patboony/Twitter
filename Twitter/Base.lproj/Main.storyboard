@@ -26,10 +26,16 @@
                                 </constraints>
                             </imageView>
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gh0-tf-sZn">
-                                <rect key="frame" x="0.0" y="0.0" width="340" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Twitter" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ATV-lH-C08">
+                                        <rect key="frame" x="24" y="267" width="273" height="34"/>
+                                        <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="30"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fNR-Tx-kYa">
-                                        <rect key="frame" x="144" y="306" width="52" height="36"/>
+                                        <rect key="frame" x="134" y="304" width="52" height="36"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <state key="normal" title="Login">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -39,18 +45,12 @@
                                             <action selector="loginAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Qu4-GZ-XJi"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Twitter" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ATV-lH-C08">
-                                        <rect key="frame" x="34" y="267" width="273" height="34"/>
-                                        <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="30"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="fNR-Tx-kYa" firstAttribute="top" secondItem="ATV-lH-C08" secondAttribute="bottom" constant="5" id="Pma-HH-tlq"/>
-                                    <constraint firstAttribute="centerX" secondItem="ATV-lH-C08" secondAttribute="centerX" id="gnJ-gT-hp5"/>
-                                    <constraint firstAttribute="centerY" secondItem="ATV-lH-C08" secondAttribute="centerY" id="ldH-di-R0Y"/>
-                                    <constraint firstAttribute="centerX" secondItem="fNR-Tx-kYa" secondAttribute="centerX" id="r4e-3u-xml"/>
+                                    <constraint firstAttribute="centerY" secondItem="ATV-lH-C08" secondAttribute="centerY" id="8Kz-9p-8Nv"/>
+                                    <constraint firstAttribute="centerX" secondItem="ATV-lH-C08" secondAttribute="centerX" id="mbW-dM-PSt"/>
+                                    <constraint firstItem="fNR-Tx-kYa" firstAttribute="top" secondItem="ATV-lH-C08" secondAttribute="bottom" constant="3" id="w6A-nf-oNi"/>
+                                    <constraint firstAttribute="centerX" secondItem="fNR-Tx-kYa" secondAttribute="centerX" id="z0z-QT-W40"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -62,7 +62,7 @@
                             <constraint firstAttribute="trailing" secondItem="Bhb-nX-3m2" secondAttribute="trailing" constant="-20" id="N8e-St-xQb"/>
                             <constraint firstItem="Gh0-tf-sZn" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="u6w-qI-jtU"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Gh0-tf-sZn" secondAttribute="bottom" id="uu0-KX-jY2"/>
-                            <constraint firstAttribute="trailing" secondItem="Gh0-tf-sZn" secondAttribute="trailing" constant="-20" id="vwk-I3-8rg"/>
+                            <constraint firstAttribute="trailing" secondItem="Gh0-tf-sZn" secondAttribute="trailing" id="vwk-I3-8rg"/>
                         </constraints>
                     </view>
                     <connections>
